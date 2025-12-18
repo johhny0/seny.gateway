@@ -19,7 +19,7 @@ async function main() {
 
     const serverService = new ServerService();
     serverService.loadRoutes(app);
-    
+
     app.listen(config.port, () => console.log(`🔥 ${config.applicationName}. Server running at: ${config.host}:${config.port}`));
 }
 

@@ -1,32 +1,27 @@
 [
-    {
-        "name": "Users API",
-        "path": "/users",
-        "url": "http://host.docker.internal:3001/"
-    },
-    {
-        "name": "Auth API",
-        "path": "/auth",
-        "url": "http://host.docker.internal:3002/"
-    },
-    {
-        "name": "Ark API",
-        "path": "/ark",
-        "url": "http://host.docker.internal:3003/"
-    },
-    {
-        "name": "Unopar API",
-        "path": "/unopar",
-        "url": "http://host.docker.internal:3004/"
-    },
-    {
-        "name": "Bar API",
-        "path": "/bar",
-        "url": "http://host.docker.internal:3005/"
-    },
-    {
-        "name": "Tour Guide API",
-        "path": "/tourguide",
-        "url": "http://host.docker.internal:3006/"
-    }
+  {
+    "name": "Users API",
+    "path": "/users",
+    "url": "http://host.docker.internal:3001/"
+  },
+  {
+    "name": "Auth API",
+    "path": "/auth",
+    "url": "http://host.docker.internal:3002/"
+  },
+  {
+    "name": "Unopar API",
+    "path": "/unopar",
+    "url": "http://host.docker.internal:3004/"
+  },
+  {
+    "name": "Bar API",
+    "path": "/bar",
+    "url": "http://host.docker.internal:3005/"
+  },
+  {
+    "name": "Tour Guide API",
+    "path": "/tourguide",
+    "url": "http://host.docker.internal:3006/"
+  }
 ]
