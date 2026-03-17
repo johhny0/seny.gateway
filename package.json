@@ -4,10 +4,10 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules ./src/index.ts",
+    "dev": "ts-node-dev --poll --respawn --transpile-only --ignore-watch node_modules ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.ts",
-    "start": "NODE_PATH=./build node build/index.js",
+    "start": "node ./dist/src/index.js",
     "build": "tsc -p ."
   },
   "repository": {
@@ -28,6 +28,7 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "express-http-proxy": "^2.1.2",
+    "express-validator": "^7.3.1",
     "helmet": "^8.1.0",
     "morgan": "^1.10.1"
   },

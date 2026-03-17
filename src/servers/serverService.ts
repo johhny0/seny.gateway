@@ -3,6 +3,23 @@ import { Server } from "./server";
 import httpProxy from "express-http-proxy";
 import { Express, Request, Response } from "express";
 import fs from "fs";
+import { body, validationResult } from "express-validator";
+
+const serverValidation = [
+    body().custom((_, { req }) => {
+        if (!req.body)
+            throw new Error("Missing body");
+        return true;
+    }),
+    body("name").notEmpty().withMessage("Name is required"),
+    body("path").notEmpty().withMessage("Path is required"),
+    body("url")
+        .notEmpty().withMessage("Url is required")
+        .isURL().withMessage("Url is invalid"),
+    body("secure")
+        .notEmpty().withMessage("Secure is required")
+        .isBoolean().withMessage("Secure must be a boolean")
+];
 
 export class ServerService {
     servers: Server[] = serversJson;
@@ -12,7 +29,18 @@ export class ServerService {
 
         app.get("/servers", (_, res: Response) => res.json(this.servers));
 
-        app.post("/servers", (req: Request, res: Response) => res.json(this.saveServers(req)));
+        app.post(
+            "/servers",
+            serverValidation,
+            (req: Request, res: Response) => {
+                const errors = validationResult(req);
+
+                if (!errors.isEmpty()) {
+                    return res.status(400).json({ errors: errors.array().map(e => e.msg) });
+                }
+                return res.json(this.saveServers(req))
+            });
+
         app.delete("/servers/:path", (req: Request, res: Response) => res.json(this.deleteServers(req)));
 
         this.servers.forEach((server: Server) => app.use(server.path, httpProxy(server.url)));
@@ -21,7 +49,12 @@ export class ServerService {
     }
 
     saveServers(req: Request) {
-        const server = new Server(req.body.name, req.body.path, req.body.url);
+        const server = new Server(
+            req.body.name,
+            req.body.path,
+            req.body.url,
+            req.body.secure);
+
 
         if (!server.path.startsWith("/"))
             server.path = "/" + server.path;

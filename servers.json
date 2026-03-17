@@ -2,26 +2,31 @@
   {
     "name": "Users API",
     "path": "/users",
-    "url": "http://host.docker.internal:3001/"
+    "url": "http://host.docker.internal:3001/",
+    "secure": false
   },
   {
     "name": "Auth API",
     "path": "/auth",
-    "url": "http://host.docker.internal:3002/"
+    "url": "http://host.docker.internal:3002/",
+    "secure": false
   },
   {
     "name": "Unopar API",
     "path": "/unopar",
-    "url": "http://host.docker.internal:3004/"
+    "url": "http://host.docker.internal:3004/",
+    "secure": false
   },
   {
     "name": "Bar API",
     "path": "/bar",
-    "url": "http://host.docker.internal:3005/"
+    "url": "http://host.docker.internal:3005/",
+    "secure": false
   },
   {
     "name": "Tour Guide API",
     "path": "/tourguide",
-    "url": "http://host.docker.internal:3006/"
+    "url": "http://host.docker.internal:3006/",
+    "secure": false
   }
 ]
