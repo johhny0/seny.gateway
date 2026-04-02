@@ -5,12 +5,12 @@ services:
       context: .
       target: build
     ports:
-    - 3000:3000
-    command: npm run dev
+      - 3000:3000
+    command: npm run start
     restart: always
     networks:
       - seny-network-gateway
-      
+
 networks:
   seny-network-gateway:
     driver: bridge

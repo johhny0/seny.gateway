@@ -1,7 +1,7 @@
 [
   {
     "name": "Users API",
-    "path": "/users",
+    "path": "/clients",
     "url": "http://host.docker.internal:3001/",
     "secure": false
   },

@@ -1,12 +1,21 @@
 import serversJson from "../../servers.json";
 import { Server } from "./server";
-import { Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import fs from "fs";
-import { validationResult } from "express-validator";
-
+import { body, validationResult } from "express-validator";
+import httpProxy from "express-http-proxy";
 
 export class ServerService {
     servers: Server[] = serversJson;
+
+    getAll = (_: Request, res: Response) => {
+        return res.json(this.servers)
+    }
+
+    loadServers(router: Router) {
+        this.servers.forEach((server: Server) =>
+            router.use(server.path, httpProxy(server.url)));
+    }
 
     saveServers = (req: Request, res: Response) => {
         const errors = validationResult(req);
@@ -15,11 +24,9 @@ export class ServerService {
             return res.status(400).json({ errors: errors.array().map(e => e.msg) });
         }
 
-        const server = new Server(
-            req.body.name,
-            req.body.path,
-            req.body.url,
-            req.body.secure);
+        const { name, path, url } = req.body;
+
+        const server = new Server(name, path, url);
 
         if (server.path && !server.path.startsWith("/"))
             server.path = "/" + server.path;
