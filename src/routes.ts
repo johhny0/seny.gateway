@@ -12,9 +12,9 @@ router.get("/", (_, res: Response) => res.json({
 
 router.get("/servers", serverService.getAll);
 
-router.post("/servers", serverValidation, serverService.saveServers);
+router.post("/servers", serverValidation, serverService.save);
 
-router.delete("/servers/:path", serverService.deleteServers);
+router.delete("/servers/:path", serverService.delete);
 
 serverService.loadServers(router);
 

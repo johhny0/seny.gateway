@@ -1,8 +1,8 @@
-import serversJson from "../../servers.json";
+import serversJson from "./servers.json";
 import { Server } from "./server";
 import { Request, Response, Router } from "express";
 import fs from "fs";
-import { body, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 import httpProxy from "express-http-proxy";
 
 export class ServerService {
@@ -17,7 +17,7 @@ export class ServerService {
             router.use(server.path, httpProxy(server.url)));
     }
 
-    saveServers = (req: Request, res: Response) => {
+    save = (req: Request, res: Response) => {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -39,7 +39,7 @@ export class ServerService {
         return res.json(this.servers);
     }
 
-    deleteServers = (req: Request, res: Response) => {
+    delete = (req: Request, res: Response) => {
         let path = req.params.path;
 
         if (!path)

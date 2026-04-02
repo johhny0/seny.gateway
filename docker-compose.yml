@@ -4,9 +4,12 @@ services:
     build:
       context: .
       target: build
+    volumes:
+      - ./:/app
+      - /app/node_modules
     ports:
       - 3000:3000
-    command: npm run start
+    command: npm run dev
     restart: always
     networks:
       - seny-network-gateway
