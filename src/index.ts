@@ -1,6 +1,6 @@
 import { EnvConfig } from "./envConfig";
-import { ServerService } from "./servers/serverService"
 import { ExpressService } from "./api/expressService";
+import routes from "./routes";
 
 //https://cloudnweb.dev/2019/09/building-a-production-ready-node-js-app-with-typescript-and-docker/
 //https://www.npmjs.com/package/http-proxy-middleware
@@ -17,8 +17,7 @@ async function main() {
     const expressService = new ExpressService()
     const app = expressService.config(config);
 
-    const serverService = new ServerService();
-    serverService.loadRoutes(app);
+    app.use(routes);
 
     app.listen(config.port, () => console.log(`🔥 ${config.applicationName}. Server running at: ${config.host}:${config.port}`));
 }
